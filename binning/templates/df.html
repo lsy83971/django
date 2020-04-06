@@ -1,0 +1,25 @@
+<table>
+  <thead>
+    <tr class="table100-head">
+      {% for df_colname in df.columns %}
+      <th>{{ df_colname }}</th>
+      {% empty %}
+      <th>抱歉，列表为空</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+      {% for df_rows in df.values %}
+      <tr>
+        {% for df_value in df_rows %}
+        <td>{{ df_value }}</td>
+        {% empty %}
+        <td>抱歉，列表为空</td>
+        {% endfor %}
+        
+      {% empty %}
+      <tr>抱歉，列表为空</tr>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>

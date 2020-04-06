@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>Table V04</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <\!--===============================================================================================-\-> -->
+    <!-- <link rel="icon" type="image/png" href="{% static "images/icons/favicon.ico" %}"/> -->
+    <!-- <\!--===============================================================================================-\-> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}"> -->
+    <!-- <\!--===============================================================================================-\-> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static "fonts/font-awesome-4.7.0/css/font-awesome.min.css" %}"> -->
+    <!-- <\!--===============================================================================================-\-> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static "vendor/animate/animate.css" %}"> -->
+    <!-- <\!--===============================================================================================-\-> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static "vendor/select2/select2.min.css" %}"> -->
+    <!-- <\!--===============================================================================================-\-> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static "vendor/perfect-scrollbar/perfect-scrollbar.css" %}"> -->
+    <!-- <\!--===============================================================================================-\-> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static "css/util.css" %}"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}"> -->
+    <style>
+      .layout-Aside {
+          z-index: 300;
+          /* position: fixed; */
+          top: 0;
+          left: 0;
+          bottom: 0;
+          -webkit-backface-visibility: hidden;
+          -moz-backface-visibility: hidden;
+          backface-visibility: hidden;
+          width: 200px;
+          background-color: #888888;
+          float:left;
+          height:1000px;
+      }
+
+      .limiter {
+          float:left;
+      }      
+    </style>
+  </head>
+  <body>
+    <div>
+      <form>
+        do:
+        <select id="tb_type" name="tb_type">
+          <option value="binning">binning</option>
+          <option value="vintage">vintage</option>
+        </select>
+        <br>        
+        date_begin: <input type="text" id="date_begin" placeholder="YYYYMMDD">
+        <br>        
+        date_end: <input type="text" id="date_end" placeholder="YYYYMMDD">
+        <br>
+        channel_id:
+        <select id="channel_id">
+          <option value="51XYK">51XYK</option>
+          <option value="ZBCASH">ZBCASH</option>
+          <option value="EX">EX</option>
+        </select>
+        <br>
+      </form>
+      <button id="submit">run</button>
+      <p id="run_status">ready!</p>
+    </div>    
+    
+    <div id="result" class="limiter">
+      {% include 'df.html' with df=df %}
+    </div>
+
+
+    <!--===============================================================================================-->
+    <script src="{% static "vendor/jquery/jquery-3.2.1.min.js" %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static "vendor/bootstrap/js/popper.js" %}"></script>
+    <script src="{% static "vendor/bootstrap/js/bootstrap.min.js" %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static "vendor/select2/select2.min.js" %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static "vendor/perfect-scrollbar/perfect-scrollbar.min.js" %}"></script>
+    <script type="text/javascript">
+      
+      $("#submit").click(function(){
+        alert("task submit success");
+        var channel_id = $("#channel_id").val();
+        var date_begin = $("#date_begin").val();
+        var date_end = $("#date_end").val();
+        var tb_type = $("#tb_type").val();
+        if (tb_type=="binning") {
+          $.get("/binning/",{'channel_id':channel_id,'date_begin':date_begin,'date_end':date_end}, function(ret){
+            $('#result').html(ret);
+          })
+        }
+
+      });
+
+
+
+      
+    </script>
+    <!--===============================================================================================-->
+    <script src="{% static "js/main.js" %}"></script>
+
+  </body>
+</html>
+
+
+
