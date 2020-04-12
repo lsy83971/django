@@ -126,6 +126,6 @@ STATIC_URL = '/static/'
 
 
 # cron tasks
-CRONJOBS = [
-    ('*/1 * * * *', 'binning.views.test_crontab', '>>' + os.path.join(BASE_DIR, 'logs/crons.log'))
-]
+# CRONJOBS = [
+#     ('*/1 * * * *', 'binning.views.test_crontab', '>>' + os.path.join(BASE_DIR, 'logs/crons.log'))
+#]
